@@ -199,13 +199,16 @@ main :: proc() {
                     if .Down in keys[.Right] {
                         vel.x += PLAYER_ACC
                     }
-                    if .Down in keys[.Up] {
+                    if .Down in keys[.Down] {
                         vel.y += PLAYER_ACC
                     }
-                    if .Down in keys[.Down] {
+                    if .Down in keys[.Up] {
                         vel.y -= PLAYER_ACC
                     }
                     pos += vel
+                    if x < 0 || x > GAME_WIDTH-32 || y < 0 || y > GAME_HEIGHT-32 {
+                        change_state(&player, .Pop)
+                    }
 
                 case .Pop:
                     animation_completed := advance_frame_idx(&player, dt, BUBBLE_FRAME_TIME, BUBBLE_FRAME_COUNT)
@@ -242,23 +245,23 @@ main :: proc() {
         }
 
         // draw spikes
-        {
-            gl.BindTexture(gl.TEXTURE_2D, textures[3]);
-            gl.Uniform1i(gl.GetUniformLocation(shader, "frame_count"), 1)
-            gl.Uniform1i(gl.GetUniformLocation(shader, "frame_idx"), 0)
-            spike_pos: [2]f32
-            for b in level {
-                if b == 'S' {
-                    gl.Uniform2fv(gl.GetUniformLocation(shader, "pos"), 1, raw_data(&spike_pos))
-                    gl.DrawArrays(gl.TRIANGLES, 0, 6)
-                } else if b == '\n' {
-                    spike_pos.x = 0
-                    spike_pos.y += 32
-                } else {
-                    spike_pos.x += 32
-                }
-            }
-        }
+        // {
+        //     gl.BindTexture(gl.TEXTURE_2D, textures[3]);
+        //     gl.Uniform1i(gl.GetUniformLocation(shader, "frame_count"), 1)
+        //     gl.Uniform1i(gl.GetUniformLocation(shader, "frame_idx"), 0)
+        //     spike_pos: [2]f32
+        //     for b in level {
+        //         if b == 'S' {
+        //             gl.Uniform2fv(gl.GetUniformLocation(shader, "pos"), 1, raw_data(&spike_pos))
+        //             gl.DrawArrays(gl.TRIANGLES, 0, 6)
+        //         } else if b == '\n' {
+        //             spike_pos.x = 0
+        //             spike_pos.y += 32
+        //         } else {
+        //             spike_pos.x += 32
+        //         }
+        //     }
+        // }
 
 		app.gl_swap_buffers(app_ctx)
 	}
