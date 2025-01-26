@@ -86,7 +86,7 @@ main :: proc() {
 
         return
     }
-
+ 
     bubble_vertices := vertices_from_img(img_bubble, BUBBLE_FRAME_WIDTH, BUBBLE_FRAME_COUNT)
     // bubble_pop_vertices := vertices_from_img(img_bubble_pop, BUBBLE_FRAME_WIDTH, BUBBLE_POP_FRAME_COUNT)
     // bubble_respawn_vertices := vertices_from_img(img_bubble_respawn, BUBBLE_FRAME_WIDTH, BUBBLE_RESPAWN_FRAME_COUNT)
