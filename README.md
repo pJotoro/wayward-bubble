@@ -1,1 +1,3 @@
 Made for the global game jam: https://globalgamejam.org/games/2025/wayward-bubble-2
+
+All I managed to get done was basic movement, and it doesn't even work properly since you move faster diagonally. I would have gotten a lot more done if I had more prior experience with OpenGL... 
